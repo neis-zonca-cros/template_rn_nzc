@@ -1,11 +1,13 @@
 import { StyleSheet } from 'react-native';
 
-import { Text, View } from '@/components/Themed';
+import { BodyText, TitleText } from '@/components/StyledText';
+import { View } from '@/components/Themed';
 
 export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>By NZC</Text>
+      <BodyText style={styles.title}>By</BodyText>
+      <TitleText style={styles.title}>NZC</TitleText>
     </View>
   );
 }
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: 80,
     fontWeight: 'bold',
   },
 });
