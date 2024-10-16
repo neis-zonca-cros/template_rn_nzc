@@ -13,7 +13,9 @@
     "prettier": "prettier --check .",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx app/ components/ constants/",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx app/ components/ constants/ --fix",
-    "prepare": "husky && husky install"
+    "prepare": "husky && husky install",
+    "init-app": "node init.js",
+    "postinstall": "yarn init-app"
   },
   "jest": {
     "preset": "jest-expo"
