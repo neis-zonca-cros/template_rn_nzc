@@ -1,11 +1,13 @@
 import { StyleSheet } from 'react-native';
 
-import { Text, View } from '@/components/Themed';
+import { BodyText, TitleText } from '@/components/StyledText';
+import { View } from '@/components/Themed';
 
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Template React Native</Text>
+      <BodyText style={styles.title}>Template</BodyText>
+      <TitleText style={styles.title}>React Native</TitleText>
     </View>
   );
 }
@@ -17,7 +19,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: 50,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });

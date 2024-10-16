@@ -8,6 +8,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
+import Colors from '@/constants/Colors';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -25,7 +26,9 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
+    TitleText: require('../assets/fonts/cocon.otf'),
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    BodyText: require('../assets/fonts/body.otf'),
     ...FontAwesome.font,
   });
 
@@ -54,7 +57,26 @@ function RootLayoutNav() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        <Stack.Screen
+          name="modal"
+          options={{
+            presentation: 'modal',
+            headerTransparent: true,
+            headerTitle: () => (
+              <FontAwesome
+                name="heart"
+                size={25}
+                color={Colors[colorScheme ?? 'light'].iconHeader}
+              />
+            ),
+            headerStyle: {
+              backgroundColor: Colors[colorScheme ?? 'light'].background,
+            },
+            headerTitleStyle: {
+              color: Colors[colorScheme ?? 'light'].text,
+            },
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );
