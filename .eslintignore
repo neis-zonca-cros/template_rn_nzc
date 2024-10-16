@@ -13,3 +13,5 @@ dist/
 
 # Ignorer tous les fichiers dans le dossier 'tests'
 tests/
+
+app.json
