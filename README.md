@@ -22,13 +22,9 @@ Suivez les étapes ci-dessous pour utiliser ce template et commencer à dévelop
 4. **Installer les dépendances** :
    - Dans le répertoire de votre nouveau dépôt, exécutez :
      - `yarn install`
-
-## ⚙️ Configuration de l'application
-
-Après avoir installé les dépendances, n'oubliez pas de modifier le nom de votre application dans le fichier **`app.json`**. Changez les valeurs suivantes :
-
-- **`name`** : Le nom affiché de votre application.
-- **`slug`** : Le nom utilisé pour identifier votre application dans l'URL et les liens.
+   - À la fin de l'installation, **Yarn** vous demandera le nom et le slug de votre application. 
+     - Le **nom** est le nom affiché de votre application.
+     - Le **slug** est utilisé pour identifier votre application dans l'URL et les liens.
 
 ## 🎈 Lancer l'application
 
@@ -39,6 +35,6 @@ Pour démarrer votre application en mode développement, utilisez la commande su
 Cela ouvrira **Expo** et vous permettra de prévisualiser votre application sur votre appareil ou un émulateur.
 
 ## 💡 Aide supplémentaire
-Les pre-commit font un Lint-staged avec esLint et prettier
-Les commit-msg utilise la config-conventionnal
+- Les pre-commit font un Lint-staged avec esLint et prettier
+- Les commit-msg utilise la config-conventionnal
 
