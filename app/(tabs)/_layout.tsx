@@ -1,20 +1,19 @@
 import React from 'react';
 
-import { Pressable } from 'react-native';
+import { Platform, Pressable, SafeAreaView } from 'react-native';
 
+import { Ionicons } from '@expo/vector-icons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
 
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
+import { ColorsEnum } from '@/enums/ColorsEnum';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']; color: string }) {
+  return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />;
 }
 
 export default function TabLayout() {
@@ -28,14 +27,23 @@ export default function TabLayout() {
         tabBarStyle: {
           backgroundColor: Colors[colorScheme ?? 'light'].background,
           borderTopWidth: 0,
-          elevation: 0,
-          shadowOpacity: 0,
+          elevation: 10,
+          shadowColor: Platform.OS == 'ios' ? ColorsEnum.BLACK_OPACITY : undefined,
+          shadowOffset: { width: 0, height: -4 },
+          shadowOpacity: 1,
+          shadowRadius: 5,
         },
         headerStyle: {
           backgroundColor: Colors[colorScheme ?? 'light'].background,
           borderBottomWidth: 0,
-          elevation: 0,
-          shadowOpacity: 0,
+          elevation: 10,
+          shadowColor: Platform.OS == 'ios' ? ColorsEnum.BLACK_OPACITY : undefined,
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 1,
+          shadowRadius: 5,
+        },
+        tabBarLabelStyle: {
+          margin: 5,
         },
         headerTitleStyle: {
           color: Colors[colorScheme ?? 'light'].text,
@@ -70,7 +78,7 @@ export default function TabLayout() {
         name="two"
         options={{
           title: 'By NZC',
-          tabBarIcon: ({ color }) => <TabBarIcon name="volume-up" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
         }}
       />
     </Tabs>
