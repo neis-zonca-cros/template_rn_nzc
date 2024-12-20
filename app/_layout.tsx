@@ -25,9 +25,9 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    // eslint-disable-next-line no-undef
     TitleText: require('../assets/fonts/cocon.otf'),
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    // eslint-disable-next-line no-undef
     BodyText: require('../assets/fonts/body.otf'),
     ...FontAwesome.font,
   });

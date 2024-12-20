@@ -1,19 +1,21 @@
-const tintColorLight = '#172329';
-const tintColorDark = '#bcbcbc';
+import { ColorsEnum } from '@/enums/ColorsEnum';
+
+const tintColorLight = ColorsEnum.DARK_BLUE;
+const tintColorDark = ColorsEnum.GREY_LIGHT;
 
 export default {
   light: {
-    text: '#172329',
-    background: '#bcbcbc',
+    text: ColorsEnum.DARK_BLUE,
+    background: ColorsEnum.GREY_LIGHT,
     tint: tintColorLight,
-    inactiveTint: '#828282',
+    inactiveTint: ColorsEnum.GREY_DARK,
     iconHeader: tintColorLight,
   },
   dark: {
-    text: '#bcbcbc',
-    background: '#172329',
+    text: ColorsEnum.GREY_LIGHT,
+    background: ColorsEnum.DARK_BLUE,
     tint: tintColorDark,
-    inactiveTint: '#595959',
+    inactiveTint: ColorsEnum.GREY_VERY_DARK,
     iconHeader: tintColorDark,
   },
 };
