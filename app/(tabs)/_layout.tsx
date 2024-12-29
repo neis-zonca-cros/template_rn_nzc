@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Platform, Pressable, SafeAreaView } from 'react-native';
+import { Platform, Pressable } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
@@ -25,6 +25,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         tabBarInactiveTintColor: Colors[colorScheme ?? 'light'].inactiveTint,
         tabBarStyle: {
+          ...(Platform.OS === 'android' ? { height: 60 } : {}),
           backgroundColor: Colors[colorScheme ?? 'light'].background,
           borderTopWidth: 0,
           elevation: 10,
