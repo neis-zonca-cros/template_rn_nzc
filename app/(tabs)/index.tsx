@@ -3,14 +3,14 @@ import { StyleSheet } from 'react-native';
 import { BodyText, TitleText } from '@/components/StyledText';
 import { View } from '@/components/Themed';
 
-export default function TabOneScreen() {
-  return (
-    <View style={styles.container}>
-      <BodyText style={styles.title}>Template</BodyText>
-      <TitleText style={styles.title}>React Native</TitleText>
-    </View>
-  );
-}
+const TabOneScreen = () => (
+  <View style={styles.container}>
+    <BodyText style={styles.title}>Template</BodyText>
+    <TitleText style={styles.title}>React Native</TitleText>
+  </View>
+);
+
+export default TabOneScreen;
 
 const styles = StyleSheet.create({
   container: {
