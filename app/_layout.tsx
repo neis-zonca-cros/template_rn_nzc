@@ -8,7 +8,6 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
-import Colors from '@/constants/Colors';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -23,7 +22,7 @@ export const unstable_settings = {
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+const RootLayout = () => {
   const [loaded, error] = useFonts({
     // eslint-disable-next-line no-undef
     TitleText: require('../assets/fonts/cocon.otf'),
@@ -52,9 +51,11 @@ export default function RootLayout() {
       <RootLayoutNav />
     </GestureHandlerRootView>
   );
-}
+};
 
-function RootLayoutNav() {
+export default RootLayout;
+
+const RootLayoutNav = () => {
   const colorScheme = useColorScheme();
 
   return (
@@ -64,24 +65,11 @@ function RootLayoutNav() {
         <Stack.Screen
           name="modal"
           options={{
-            presentation: 'modal',
-            headerTransparent: true,
-            headerTitle: () => (
-              <FontAwesome
-                name="heart"
-                size={25}
-                color={Colors[colorScheme ?? 'light'].iconHeader}
-              />
-            ),
-            headerStyle: {
-              backgroundColor: Colors[colorScheme ?? 'light'].background,
-            },
-            headerTitleStyle: {
-              color: Colors[colorScheme ?? 'light'].text,
-            },
+            presentation: 'transparentModal',
+            headerShown: false,
           }}
         />
       </Stack>
     </ThemeProvider>
   );
-}
+};

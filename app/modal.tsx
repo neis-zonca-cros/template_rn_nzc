@@ -1,21 +1,43 @@
-import { Platform, StyleSheet, useColorScheme } from 'react-native';
+import React, { useRef } from 'react';
 
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { StatusBar } from 'expo-status-bar';
+import { Pressable, StyleSheet, View } from 'react-native';
+
+import { FontAwesome } from '@expo/vector-icons';
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import { useRouter } from 'expo-router';
 
 import { BodyText } from '@/components/StyledText';
-import { View } from '@/components/Themed';
-import Colors from '@/constants/Colors';
+import { useThemeColor } from '@/components/Themed';
+import { ColorsName } from '@/enums/ColorsName';
 
 export default function ModalScreen() {
-  const colorScheme = useColorScheme();
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const router = useRouter();
+  const backgroundColor = useThemeColor({}, ColorsName.BOTTOM_SHEET_BACKGROUND);
+  const iconColor = useThemeColor({}, ColorsName.ICON_HEADER);
+
+  const closeBottomSheet = () => {
+    bottomSheetRef.current?.close();
+    router.back();
+  };
 
   return (
     <View style={styles.container}>
-      <BodyText style={styles.title}>Fait avec </BodyText>
-      <FontAwesome name="heart" size={48} color={Colors[colorScheme ?? 'light'].iconHeader} />
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
+      <Pressable style={styles.overlay} onPress={closeBottomSheet} />
+
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={1}
+        snapPoints={['25%', '50%', '75%']}
+        enablePanDownToClose={true}
+        onClose={() => router.back()}
+        backgroundStyle={{ backgroundColor }}
+      >
+        <BottomSheetView style={styles.contentContainer}>
+          <BodyText style={styles.title}>Fait avec </BodyText>
+          <FontAwesome name="heart" size={48} color={iconColor} />
+        </BottomSheetView>
+      </BottomSheet>
     </View>
   );
 }
@@ -23,12 +45,18 @@ export default function ModalScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'transparent',
+  },
+  overlay: {
+    flex: 1,
+  },
+  contentContainer: {
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
-    paddingBottom: 5,
-    fontSize: 50,
+    margin: 10,
+    fontSize: 20,
     fontWeight: 'bold',
   },
 });

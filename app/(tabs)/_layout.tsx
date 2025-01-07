@@ -1,32 +1,35 @@
 import React from 'react';
 
-import { Platform, Pressable } from 'react-native';
+import { Platform } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
+import { Tabs } from 'expo-router';
 
+import { useThemeColor } from '@/components/Themed';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-import { useColorScheme } from '@/components/useColorScheme';
-import Colors from '@/constants/Colors';
 import { ColorsEnum } from '@/enums/ColorsEnum';
+import { ColorsName } from '@/enums/ColorsName';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']; color: string }) {
-  return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+const TabBarIcon = (props: {
+  name: React.ComponentProps<typeof Ionicons>['name'];
+  color: ColorsEnum;
+}) => <Ionicons size={28} style={{ marginBottom: -3 }} name={props.name} color={props.color} />;
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+const TabLayout = () => {
+  const tabBarActiveTintColor = useThemeColor({}, ColorsName.TINT);
+  const tabBarInactiveTintColor = useThemeColor({}, ColorsName.INACTIVE_TINT);
+  const backgroundColor = useThemeColor({}, ColorsName.BACKGROUND);
+  const headerTextColor = useThemeColor({}, ColorsName.TEXT);
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        tabBarInactiveTintColor: Colors[colorScheme ?? 'light'].inactiveTint,
+        tabBarActiveTintColor: tabBarActiveTintColor,
+        tabBarInactiveTintColor: tabBarInactiveTintColor,
         tabBarStyle: {
           ...(Platform.OS === 'android' ? { height: 60 } : {}),
-          backgroundColor: Colors[colorScheme ?? 'light'].background,
+          backgroundColor: backgroundColor,
           borderTopWidth: 0,
           elevation: 10,
           shadowColor: Platform.OS == 'ios' ? ColorsEnum.BLACK_OPACITY : undefined,
@@ -35,7 +38,7 @@ export default function TabLayout() {
           shadowRadius: 5,
         },
         headerStyle: {
-          backgroundColor: Colors[colorScheme ?? 'light'].background,
+          backgroundColor: backgroundColor,
           borderBottomWidth: 0,
           elevation: 10,
           shadowColor: Platform.OS == 'ios' ? ColorsEnum.BLACK_OPACITY : undefined,
@@ -47,7 +50,7 @@ export default function TabLayout() {
           margin: 5,
         },
         headerTitleStyle: {
-          color: Colors[colorScheme ?? 'light'].text,
+          color: headerTextColor,
         },
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
@@ -58,30 +61,18 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Template',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].iconHeader}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color as ColorsEnum} />,
         }}
       />
       <Tabs.Screen
         name="two"
         options={{
           title: 'By NZC',
-          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color as ColorsEnum} />,
         }}
       />
     </Tabs>
   );
-}
+};
+
+export default TabLayout;
